@@ -2,7 +2,7 @@
 it is a tool for managing the go environment and project
 
 
-```
+```bash
 go get -u github.com/go-rut/gorut
 cd $GOPATH/src/github.com/go-rut/gorut
 go build
@@ -12,6 +12,7 @@ mv gorut /usr/local/bin/
 ------
 
 ## GoRut Usage
+
 ```
 NAME:
    gorut - it is a tool for managing the go environment and project
@@ -47,7 +48,7 @@ cgo_enabled| C Go Enabled Flag| true or false
 deps| Project Dependences | Support Git or Go
 
 
-```
+```json
 {
   "project": "github.com/go-rut/gorut_test",
   "envs": {
@@ -81,7 +82,7 @@ deps| Project Dependences | Support Git or Go
 
 ## Step 1 - Initial go environment and go source path
 
-```
+```bash
 gorut init
 ```
 
@@ -103,7 +104,7 @@ Key|Information
 
 If create an new project like this:
 
-```
+```bash
 gorut create
 ```
 
@@ -114,7 +115,7 @@ It will create an new project (ProjectPath: $gopath/src/github.com/go-rut/gorut_
 
 If create an new ddd project like this:
 
-```
+```bash
 gorut create -f -t=ddd
 ```
 
@@ -122,18 +123,20 @@ It will create an new project (ProjectPath: $gopath/src/github.com/go-rut/gorut_
 
 But it has ddd directories:
 
-* $ProjectPath/conf/
-* $ProjectPath/docs/
-* $ProjectPath/handlers/
-* $ProjectPath/infrastructure/
-* $ProjectPath/models/
-* $ProjectPath/repository/
+```
+$ProjectPath/conf/
+$ProjectPath/docs/
+$ProjectPath/handlers/
+$ProjectPath/infrastructure/
+$ProjectPath/models/
+$ProjectPath/repository/
+```
 
 ### Sample 3 - DDD Sample Project
 
 If create an new ddd project like this:
 
-```
+```bash
 gorut create -f -t=ddd_sample
 ```
 
@@ -147,7 +150,7 @@ If you have other good practice, write your template into tpl path.
 
 Your struct must be GoRutTemplate:
 
-```
+```go
 type GoRutTemplate interface {
   Create() error
 }
@@ -155,7 +158,7 @@ type GoRutTemplate interface {
 
 ## Step 3 - Move sample config into project path
 
-```
+```bash
 mv gorut.conf /Users/henryhuang/code/example/src/github.com/go-rut/gorut_test
 ```
 
@@ -164,7 +167,7 @@ mv gorut.conf /Users/henryhuang/code/example/src/github.com/go-rut/gorut_test
 * command : gorut go
 * Run gorut go - link go: go go_subcommand [args]
 
-```
+```bash
 cd /Users/henryhuang/code/example/src/github.com/go-rut/gorut_test
 gorut go run main.go
 ```
@@ -177,7 +180,7 @@ If your project need dependences, you can write into config. It Supported Git An
 
 ### Get dependences
 
-```
+```bash
 gorut deps
 ```
 

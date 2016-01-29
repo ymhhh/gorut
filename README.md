@@ -99,7 +99,7 @@ Key|Information
 -f|if it is true, it will delete the old project, then create an new project
 -t|create the project with template, default is null. buildin: ddd, ddd_sample
 
-### Sample 1
+### Sample 1 - Project Without Code
 
 If create an new project like this:
 
@@ -110,9 +110,9 @@ gorut create
 It will create an new project (ProjectPath: $gopath/src/github.com/go-rut/gorut_test) without any code.
 
 
-### Sample 2
+### Sample 2 - DDD(Domain Driven Design) Project Without Code
 
-If create an new ddd(Domain Driven Design) project like this:
+If create an new ddd project like this:
 
 ```
 gorut create -f -t=ddd
@@ -129,7 +129,7 @@ But it has ddd directories:
 * $ProjectPath/models/
 * $ProjectPath/repository/
 
-### Sample 3
+### Sample 3 - DDD Sample Project
 
 If create an new ddd project like this:
 
@@ -140,6 +140,18 @@ gorut create -f -t=ddd_sample
 It will create project (ProjectPath: $gopath/src/github.com/go-rut/gorut_test) with ddd sample code.
 
 ![ProjectFiles](images/ddd_sample.png)
+
+### Other Project Template
+
+If you have other good practice, write your template into tpl path.
+
+Your struct must be GoRutTemplate:
+
+```
+type GoRutTemplate interface {
+  Create() error
+}
+```
 
 ## Step 3 - Move sample config into project path
 

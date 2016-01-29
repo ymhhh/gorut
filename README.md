@@ -4,7 +4,7 @@ it is a tool for managing the go environment and project
 
 ```
 go get -u github.com/go-rut/gorut
-cd $GOROOT/src/github.com/go-rut/gorut
+cd $GOPATH/src/github.com/go-rut/gorut
 go build
 mv gorut /usr/local/bin/
 ```

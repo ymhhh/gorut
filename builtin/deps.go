@@ -5,9 +5,8 @@ import (
 	"regexp"
 
 	"github.com/codegangsta/cli"
-	"github.com/go-rut/utils/files"
-
 	"github.com/codeskyblue/go-sh"
+	"github.com/go-rut/files"
 )
 
 const (

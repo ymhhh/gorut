@@ -4,8 +4,7 @@ import (
 	"path"
 
 	"github.com/codegangsta/cli"
-
-	"github.com/go-rut/utils/files"
+	"github.com/go-rut/files"
 )
 
 func (p *GoRut) cmdInitial(c *cli.Context) {

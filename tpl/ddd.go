@@ -3,7 +3,7 @@ package tpl
 import (
 	"path"
 
-	"github.com/go-rut/utils/files"
+	"github.com/go-rut/files"
 )
 
 const (

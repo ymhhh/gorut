@@ -4,7 +4,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/go-rut/utils/config_reader"
+	"github.com/go-rut/config_reader"
 )
 
 const (

@@ -5,8 +5,7 @@ import (
 	"syscall"
 
 	"github.com/codegangsta/cli"
-	"github.com/go-rut/utils/files"
-
+	"github.com/go-rut/files"
 	"github.com/go-rut/gorut/tpl"
 )
 

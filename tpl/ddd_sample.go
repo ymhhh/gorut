@@ -20,26 +20,26 @@ import (
 )
 
 func main() {
-    repoGoRut := repo.NewGoRutRepo()
-    repoHelloWorld := repo.NewHelloWorldRepo()
+    repoSQL := repo.NewSqlRepo()
+    repoRedis := repo.NewRedisRepo()
 
-    sampleHandler := handlers.NewSampleHandler(repoGoRut)
-    sampleHandler.SayHelloOK()
+    sampleHandler := handlers.NewUserHandler(repoSQL)
+    sampleHandler.SayHello()
 
-    sampleHandler = handlers.NewSampleHandler(repoHelloWorld)
-    sampleHandler.SayHelloOK()
+    sampleHandler = handlers.NewUserHandler(repoRedis)
+    sampleHandler.SayHello()
 }
 `
 
-	_DDDRepositorySample = `
+	_DDDUserRepository = `
 package repository
 
-type SampleRepository interface {
-    SayHello()
+type UserRepository interface {
+    GetUserName() (name string)
 }
 `
 
-	_DDDRepoGoRut = `package repo
+	_DDDSqlRepo = `package repo
 
 import (
     "fmt"
@@ -47,20 +47,19 @@ import (
     "{{.RepositoryPath}}"
 )
 
-type GoRutRepo struct {
-    repository.SampleRepository
+type SqlRepo struct {
 }
 
-func NewGoRutRepo() (r *GoRutRepo) {
-    r = new(GoRutRepo)
-    return
+func NewSqlRepo() (repository.UserRepository) {
+    return new(SqlRepo)
 }
 
-func (p *GoRutRepo) SayHello() {
-    fmt.Println("Hello, repo gorut! - It's gorut world.")
+func (p *SqlRepo) GetUserName() (string) {
+    fmt.Println("Hello, repo sql! - Get user name from sql")
+    return "SQL"
 }
 `
-	_DDDRepoHelloWorld = `package repo
+	_DDDRedisRepo = `package repo
 
 import (
     "fmt"
@@ -68,42 +67,44 @@ import (
     "{{.RepositoryPath}}"
 )
 
-type HelloWorldRepo struct {
-    repository.SampleRepository
+type RedisRepo struct {
 }
 
-func NewHelloWorldRepo() (repo *HelloWorldRepo) {
-    repo = new(HelloWorldRepo)
-    return
+func NewRedisRepo() (repository.UserRepository) {
+    return new(RedisRepo)
 }
 
-func (p *HelloWorldRepo) SayHello() {
-    fmt.Println("Hello, repo world! - It's hello world.")
+func (p *RedisRepo) GetUserName() (name string){
+    fmt.Println("Hello, repo redis! - Get user name from redis")
+    return "Redis"
 }
 `
 
-	_DDDSampleHandler = `package handlers
+	_DDDuserHandler = `package handlers
 
 import (
+	"fmt"
+
     "{{.RepositoryPath}}"
 )
 
-var sampleHandler *SampleHandler
+var userHandler *UserHandler
 
-type SampleHandler struct {
-    SampleRepository repository.SampleRepository
+type UserHandler struct {
+    UserRepository repository.UserRepository
 }
 
-func NewSampleHandler(sampleRepository repository.SampleRepository) *SampleHandler {
-    if sampleHandler == nil {
-        sampleHandler = new(SampleHandler)
+func NewUserHandler(userRepository repository.UserRepository) *UserHandler {
+    if userHandler == nil {
+        userHandler = new(UserHandler)
     }
-    sampleHandler.SampleRepository = sampleRepository
-    return sampleHandler
+    userHandler.UserRepository = userRepository
+    return userHandler
 }
 
-func (p *SampleHandler) SayHelloOK() {
-    p.SampleRepository.SayHello()
+func (p *UserHandler) SayHello() {
+    username := p.UserRepository.GetUserName()
+    fmt.Println("hello", username)
 }
 `
 )
@@ -124,10 +125,10 @@ var (
 
 func init() {
 	dddFilesMap["main.go"] = _DDDMainGo
-	dddFilesMap[_DDDPathHandlers+"handler_sample.go"] = _DDDSampleHandler
-	dddFilesMap[_DDDPathRepoLogic+"repo_gorut.go"] = _DDDRepoGoRut
-	dddFilesMap[_DDDPathRepoLogic+"repo_hello_world.go"] = _DDDRepoHelloWorld
-	dddFilesMap[_DDDPathRepository+"repository_sample.go"] = _DDDRepositorySample
+	dddFilesMap[_DDDPathHandlers+"handler_user.go"] = _DDDuserHandler
+	dddFilesMap[_DDDPathRepoLogic+"repo_sql.go"] = _DDDSqlRepo
+	dddFilesMap[_DDDPathRepoLogic+"repo_redis.go"] = _DDDRedisRepo
+	dddFilesMap[_DDDPathRepository+"repository_user.go"] = _DDDUserRepository
 }
 
 func newDDDSampleTemplate(goPath, appPath string) *DDDSampleTemplate {

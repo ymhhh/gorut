@@ -7,13 +7,14 @@ import (
 )
 
 const (
-	_DDDPathConf           = "/conf/"
-	_DDDPathRepository     = "/repository/"
-	_DDDPathRepoLogic      = "/repository/repo/"
-	_DDDPathHandlers       = "/handlers/"
-	_DDDPathDocs           = "/docs/"
-	_DDDPathInfrastructure = "/infrastructure/"
-	_DDDPathModels         = "/models/"
+	_DDDPathConf         = "/conf/"
+	_DDDPathRepository   = "/repository/"
+	_DDDPathRepoLogic    = "/repository/repo/"
+	_DDDPathHandlers     = "/handlers/"
+	_DDDPathDocs         = "/docs/"
+	_DDDPathCommon       = "/common/"
+	_DDDPathModels       = "/models/"
+	_DDDPathHandlerLogic = "/logics/"
 )
 
 type DDDTemplate struct {
@@ -44,6 +45,11 @@ func (p *DDDTemplate) mkDirs() (err error) {
 		return
 	}
 
+	appHandlerLogicPath := path.Join(p.GoPath, _pathSrc, p.AppPath, _DDDPathHandlerLogic)
+	if err = files.MkCommonDirAll(appHandlerLogicPath); err != nil {
+		return
+	}
+
 	appRepoLogicPath := path.Join(p.GoPath, _pathSrc, p.AppPath, _DDDPathRepoLogic)
 	if err = files.MkCommonDirAll(appRepoLogicPath); err != nil {
 		return
@@ -59,8 +65,8 @@ func (p *DDDTemplate) mkDirs() (err error) {
 		return
 	}
 
-	appInfrastructurePath := path.Join(p.GoPath, _pathSrc, p.AppPath, _DDDPathInfrastructure)
-	if err = files.MkCommonDirAll(appInfrastructurePath); err != nil {
+	appCommonPath := path.Join(p.GoPath, _pathSrc, p.AppPath, _DDDPathCommon)
+	if err = files.MkCommonDirAll(appCommonPath); err != nil {
 		return
 	}
 

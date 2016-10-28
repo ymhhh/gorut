@@ -38,21 +38,21 @@ GLOBAL OPTIONS:
    --version, -v	print the version
 ```
 
-## Config Sample
+## Config Example
 
 Key|Information|Sample
 :-:|:-:|:-:
-project|Path: github.com/go-rut; ProjectName: gorut_test|github.com/go-rut/gorut_test
-gopath|Go Source Path|/Users/henryhuang/code/example
+project|Path: github.com/go-rut; ProjectName: gorut_test|github.com/go-rut/gorut/example/gorut_test
+gopath|Go Source Path|/Users/henryhuang/code/golang
 cgo_enabled| C Go Enabled Flag| true or false
 deps| Project Dependences | Support Git or Go
 
 
 ```json
 {
-  "project": "github.com/go-rut/gorut_test",
+  "project": "github.com/go-rut/gorut/example/gorut_test",
   "envs": {
-    "gopath": "/Users/henryhuang/code/example",
+    "gopath": "/Users/henryhuang/code/golang",
     "cgo_enabled": false
   },
   "deps": [
@@ -92,8 +92,16 @@ gorut init
 * $gopath/pkg
 * $gopath/bin
 
+## Step 2 - Example config
 
-## Step 2 - Create a new project with gorut.config
+```bash
+cd example
+```
+
+[example](example/gorut.conf)
+
+
+## Step 3 - Create a new project with gorut.config
 
 Key|Information
 :-:|:-:
@@ -124,10 +132,11 @@ It will create an new project (ProjectPath: $gopath/src/github.com/go-rut/gorut_
 But it has ddd directories:
 
 ```
+$ProjectPath/common/
 $ProjectPath/conf/
 $ProjectPath/docs/
 $ProjectPath/handlers/
-$ProjectPath/infrastructure/
+$ProjectPath/logics/
 $ProjectPath/models/
 $ProjectPath/repository/
 ```
@@ -137,6 +146,7 @@ $ProjectPath/repository/
 If create an new ddd project like this:
 
 ```bash
+cd example
 gorut create -f -t=ddd_sample
 ```
 
@@ -156,19 +166,19 @@ type GoRutTemplate interface {
 }
 ```
 
-## Step 3 - Move sample config into project path
+## Step 4 - Move sample config into project path
 
 ```bash
-mv gorut.conf /Users/henryhuang/code/example/src/github.com/go-rut/gorut_test
+mv gorut.conf /Users/henryhuang/code/golang/src/github.com/go-rut/gorut/example/gorut_test/
 ```
 
-## Step 4 - Run ddd sample
+## Step 5 - Run ddd sample
 
 * command : gorut go
 * Run gorut go - link go: go go_subcommand [args]
 
 ```bash
-cd /Users/henryhuang/code/example/src/github.com/go-rut/gorut_test
+cd gorut_test/
 gorut go run main.go
 ```
 

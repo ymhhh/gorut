@@ -1,6 +1,12 @@
 # gorut
 it is a tool for managing the go environment and project
 
+## Introduction
+
+* [WIKI:en](https://en.wikipedia.org/wiki/Domain-driven_design)
+
+
+## Installation
 
 ```bash
 go get -u github.com/go-rut/gorut
@@ -21,7 +27,7 @@ USAGE:
    gorut [global options] command [command options] [arguments...]
 
 VERSION:
-   0.0.1
+   0.0.2
 
 AUTHOR(S):
    Henry Huang <hhh@rutcode.com>
@@ -135,7 +141,8 @@ But it has ddd directories:
 $ProjectPath/common/
 $ProjectPath/conf/
 $ProjectPath/docs/
-$ProjectPath/handlers/
+$ProjectPath/domain/
+$ProjectPath/services/
 $ProjectPath/logics/
 $ProjectPath/models/
 $ProjectPath/repository/

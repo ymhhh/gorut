@@ -14,7 +14,7 @@ var (
 	appName     = "gorut"
 	author      = "Henry Huang"
 	email       = "hhh@rutcode.com"
-	version     = "0.0.1"
+	version     = "0.0.2"
 	description = "it is a tool for managing the go environment and project"
 )
 

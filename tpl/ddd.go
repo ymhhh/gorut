@@ -5,20 +5,18 @@
 package tpl
 
 import (
-	"path"
-
 	"github.com/go-rut/files"
 )
 
 const (
-	_DDDPathConf         = "/conf/"
-	_DDDPathRepository   = "/repository/"
-	_DDDPathRepoLogic    = "/repository/repo/"
-	_DDDPathHandlers     = "/handlers/"
-	_DDDPathDocs         = "/docs/"
-	_DDDPathCommon       = "/common/"
-	_DDDPathModels       = "/models/"
-	_DDDPathHandlerLogic = "/logics/"
+	_DDDPathConf       = "conf"
+	_DDDPathRepository = "repository"
+	_DDDPathRepoLogic  = "repository/repo"
+	_DDDPathDomain     = "domain"
+	_DDDPathServices   = "services"
+	_DDDPathDocs       = "docs"
+	_DDDPathCommon     = "common"
+	_DDDPathLogic      = "logics"
 )
 
 type DDDTemplate struct {
@@ -44,39 +42,30 @@ func (p *DDDTemplate) Create() error {
 }
 
 func (p *DDDTemplate) mkDirs() (err error) {
-	appConfigPath := path.Join(p.GoPath, _pathSrc, p.AppPath, _DDDPathConf)
-	if err = files.MkCommonDirAll(appConfigPath); err != nil {
+	if err = p.mkdirAll(_DDDPathConf); err != nil {
 		return
 	}
-
-	appHandlerLogicPath := path.Join(p.GoPath, _pathSrc, p.AppPath, _DDDPathHandlerLogic)
-	if err = files.MkCommonDirAll(appHandlerLogicPath); err != nil {
+	if err = p.mkdirAll(_DDDPathLogic); err != nil {
 		return
 	}
-
-	appRepoLogicPath := path.Join(p.GoPath, _pathSrc, p.AppPath, _DDDPathRepoLogic)
-	if err = files.MkCommonDirAll(appRepoLogicPath); err != nil {
+	if err = p.mkdirAll(_DDDPathRepoLogic); err != nil {
 		return
 	}
-
-	appHandlersPath := path.Join(p.GoPath, _pathSrc, p.AppPath, _DDDPathHandlers)
-	if err = files.MkCommonDirAll(appHandlersPath); err != nil {
+	if err = p.mkdirAll(_DDDPathDomain); err != nil {
 		return
 	}
-
-	appDocsPath := path.Join(p.GoPath, _pathSrc, p.AppPath, _DDDPathDocs)
-	if err = files.MkCommonDirAll(appDocsPath); err != nil {
+	if err = p.mkdirAll(_DDDPathServices); err != nil {
 		return
 	}
-
-	appCommonPath := path.Join(p.GoPath, _pathSrc, p.AppPath, _DDDPathCommon)
-	if err = files.MkCommonDirAll(appCommonPath); err != nil {
+	if err = p.mkdirAll(_DDDPathDocs); err != nil {
 		return
 	}
-
-	appModelsPath := path.Join(p.GoPath, _pathSrc, p.AppPath, _DDDPathModels)
-	if err = files.MkCommonDirAll(appModelsPath); err != nil {
+	if err = p.mkdirAll(_DDDPathCommon); err != nil {
 		return
 	}
 	return
+}
+
+func (p *DDDTemplate) mkdirAll(name string) (err error) {
+	return files.MkCommonDirAll(pathJoin(p.GoPath, _pathSrc, p.AppPath, name))
 }

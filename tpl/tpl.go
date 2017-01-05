@@ -4,6 +4,10 @@
 
 package tpl
 
+import (
+	"path"
+)
+
 const (
 	TemplateDDD       = "ddd"
 	TemplateDDDSample = "ddd_sample"
@@ -22,4 +26,8 @@ func NewTemplate(tplName, goPath, appPath string) GoRutTemplate {
 		return tpl
 	}
 	return nil
+}
+
+func pathJoin(pathes ...string) string {
+	return path.Join(pathes...)
 }

@@ -10,9 +10,18 @@ it is a tool for managing the go environment and project
 
 ```bash
 go get -u github.com/go-rut/gorut
-cd $GOPATH/src/github.com/go-rut/gorut
+cd ${GOPATH}/src/github.com/go-rut/gorut
+```
+
+```bash
 go build
 mv gorut /usr/local/bin/
+```
+
+Or build by Makefile
+
+```bash
+make
 ```
 
 ------

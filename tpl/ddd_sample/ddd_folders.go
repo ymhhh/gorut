@@ -2,9 +2,11 @@
 
 // Copyright (c) 2016 rutcode-go
 
-package tpl
+package ddd_sample
 
 import (
+	"path"
+
 	"github.com/go-rut/files"
 )
 
@@ -16,7 +18,6 @@ const (
 	_DDDPathServices   = "services"
 	_DDDPathDocs       = "docs"
 	_DDDPathCommon     = "common"
-	_DDDPathLogic      = "logics"
 )
 
 type DDDTemplate struct {
@@ -24,15 +25,14 @@ type DDDTemplate struct {
 	AppPath string
 }
 
-var (
-	dddTemplate *DDDTemplate
-)
+var dddTemplate *DDDTemplate
 
-func newDDDTemplate(goPath, appPath string) *DDDTemplate {
+func NewDDDFoldersTemplate(goPath, appPath string) *DDDTemplate {
 	if dddTemplate == nil {
-		dddTemplate = new(DDDTemplate)
-		dddTemplate.GoPath = goPath
-		dddTemplate.AppPath = appPath
+		dddTemplate = &DDDTemplate{
+			GoPath:  goPath,
+			AppPath: appPath,
+		}
 	}
 	return dddTemplate
 }
@@ -43,9 +43,6 @@ func (p *DDDTemplate) Create() error {
 
 func (p *DDDTemplate) mkDirs() (err error) {
 	if err = p.mkdirAll(_DDDPathConf); err != nil {
-		return
-	}
-	if err = p.mkdirAll(_DDDPathLogic); err != nil {
 		return
 	}
 	if err = p.mkdirAll(_DDDPathRepoLogic); err != nil {
@@ -68,4 +65,8 @@ func (p *DDDTemplate) mkDirs() (err error) {
 
 func (p *DDDTemplate) mkdirAll(name string) (err error) {
 	return files.MkCommonDirAll(pathJoin(p.GoPath, _pathSrc, p.AppPath, name))
+}
+
+func pathJoin(pathes ...string) string {
+	return path.Join(pathes...)
 }

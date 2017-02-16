@@ -2,7 +2,7 @@
 
 // Copyright (c) 2016 rutcode-go
 
-package tpl
+package ddd_sample
 
 import (
 	"bytes"
@@ -85,7 +85,7 @@ func (p *RedisRepo) GetUser() (domain.User){
 }
 `
 
-	_DDDuserHandler = `package services
+	_DDDUserHandler = `package services
 
 import (
 	"fmt"
@@ -132,7 +132,7 @@ type DDDSampleTemplate struct {
 
 var dddSampleTemplate *DDDSampleTemplate
 
-func newDDDSampleTemplate(goPath, appPath string) *DDDSampleTemplate {
+func NewDDDSampleTemplate(goPath, appPath string) *DDDSampleTemplate {
 	if dddSampleTemplate == nil {
 		dddSampleTemplate = &DDDSampleTemplate{
 			GoPath:  goPath,
@@ -146,7 +146,7 @@ func newDDDSampleTemplate(goPath, appPath string) *DDDSampleTemplate {
 			},
 			FilesMap: map[string]string{
 				"main.go": _DDDMainGo,
-				pathJoin(_DDDPathServices, "service_user.go"):      _DDDuserHandler,
+				pathJoin(_DDDPathServices, "service_user.go"):      _DDDUserHandler,
 				pathJoin(_DDDPathRepoLogic, "repo_sql.go"):         _DDDSqlRepo,
 				pathJoin(_DDDPathRepoLogic, "repo_redis.go"):       _DDDRedisRepo,
 				pathJoin(_DDDPathRepository, "repository_user.go"): _DDDUserRepository,
@@ -175,8 +175,7 @@ func (p *DDDSampleTemplate) mkFiles() (err error) {
 			return
 		}
 		filename := pathJoin(p.GoPath, _pathSrc, p.AppPath, k)
-		_, err = files.WriteFile(filename, buf.String())
-		if err != nil {
+		if _, err = files.WriteFile(filename, buf.String()); err != nil {
 			return
 		}
 	}

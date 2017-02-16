@@ -18,8 +18,6 @@ const (
 )
 
 const (
-	// _DDDPathConf       = "conf"
-	// _DDDPathRepoLogic  = "repository/repo"
 	_PathConf     = "conf"
 	_PathServices = "services"
 	_PathDocs     = "docs"

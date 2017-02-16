@@ -1,6 +1,5 @@
 all: ddd ddd_sample ddd_isolator
 
-
 build:
 	./build.sh
 

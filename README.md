@@ -36,7 +36,7 @@ USAGE:
    gorut [global options] command [command options] [arguments...]
 
 VERSION:
-   0.0.2
+   0.0.3
 
 AUTHOR(S):
    Henry Huang <hhh@rutcode.com>
@@ -76,11 +76,7 @@ gorut init
 
 ## Step 2 - Example config
 
-```bash
-cd example
-```
-
-[example](example/gorut.conf)
+[Example Config](example/gorut.conf)
 
 
 ## Step 3 - Create a new project with gorut.config
@@ -88,7 +84,7 @@ cd example
 Key|Information
 :-:|:-:
 -f|if it is true, it will delete the old project, then create an new project
--t|create the project with template, default is null. buildin: ddd, ddd_sample
+-t|create the project with template, default is null. buildin: ddd, ddd_sample, ddd_isolator
 
 ### Sample 1 - Project Without Code
 
@@ -119,7 +115,6 @@ $ProjectPath/conf/
 $ProjectPath/docs/
 $ProjectPath/domain/
 $ProjectPath/services/
-$ProjectPath/logics/
 $ProjectPath/models/
 $ProjectPath/repository/
 $ProjectPath/repository/repo
@@ -194,4 +189,5 @@ gorut deps
 
 It will get dependences like this:
 
-![ProjectFiles](images/dependences.png)
+![Run Dependeces](images/dependences.png)
+![Project Folders](images/dependences_folders.png)

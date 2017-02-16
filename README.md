@@ -62,39 +62,6 @@ gopath|Go Source Path|/Users/henryhuang/code/golang
 cgo_enabled| C Go Enabled Flag| true or false
 deps| Project Dependences | Support Git or Go
 
-
-```json
-{
-  "project": "github.com/go-rut/gorut/example/gorut_test",
-  "envs": {
-    "gopath": "/Users/henryhuang/code/golang",
-    "cgo_enabled": false
-  },
-  "deps": [
-    {
-      "name": "gorut-utils",
-      "repo": "https://github.com/go-rut/utils",
-      "vcs": "git",
-      "options": {
-        "flags": [],
-        "remote": "origin",
-        "branch": "master"
-      }
-    },
-    {
-      "name": "gorut-fsm",
-      "repo": "github.com/go-rut/fsm",
-      "vcs": "go",
-      "options": {
-        "flags": [
-          "-u"
-        ]
-      }
-    }
-  ]
-}
-```
-
 ## Step 1 - Initial go environment and go source path
 
 ```bash
@@ -155,6 +122,7 @@ $ProjectPath/services/
 $ProjectPath/logics/
 $ProjectPath/models/
 $ProjectPath/repository/
+$ProjectPath/repository/repo
 ```
 
 ### Sample 3 - DDD Sample Project
@@ -169,6 +137,20 @@ gorut create -f -t=ddd_sample
 It will create project (ProjectPath: $gopath/src/github.com/go-rut/gorut_test) with ddd sample code.
 
 ![ProjectFiles](images/ddd_sample.png)
+
+
+### Sample 4 - DDD Isolator Project
+
+It depends on github.com/gogap/isolator, if create an new ddd project like this:
+
+```bash
+cd example
+gorut create -f -t=ddd_isolator
+```
+
+It will create project (ProjectPath: $gopath/src/github.com/go-rut/gorut_test) with ddd isolator code.
+
+![ProjectFiles](images/ddd_isolator.png)
 
 ### Other Project Template
 

@@ -21,33 +21,23 @@ func main() {
 		return
 	}
 
-	sqlSayHello()
-
-	redisSayHello()
-}
-
-func sqlSayHello() {
-
-	isor, err := generateIsolator(repo.NewSqlRepo(), (*repo.SqlRepo)(nil))
+	sqlIsor, err := generateIsolator(repo.NewSqlRepo(), (*repo.SqlRepo)(nil))
 	if err != nil {
 		panic(err)
 		return
 	}
 
-	sqlService := services.NewService(isor)
-	sqlService.SayHello(context.Background(), (*services.ReqNull)(nil))
-}
+	service := services.NewService(sqlIsor)
+	service.SayHello(context.Background(), (*services.ReqNull)(nil))
 
-func redisSayHello() {
-
-	isor, err := generateIsolator(repo.NewRedisRepo(), (*repo.RedisRepo)(nil))
+	redisIsor, err := generateIsolator(repo.NewRedisRepo(), (*repo.RedisRepo)(nil))
 	if err != nil {
 		panic(err)
 		return
 	}
 
-	redisService := services.NewService(isor)
-	redisService.SayHello(context.Background(), (*services.ReqNull)(nil))
+	service = services.NewService(redisIsor)
+	service.SayHello(context.Background(), (*services.ReqNull)(nil))
 }
 
 func generateIsolator(r isolator.Object, os ...isolator.Object) (
@@ -71,7 +61,9 @@ func generateIsolator(r isolator.Object, os ...isolator.Object) (
 		[]isolator.Object(os),
 		isolator.SessionOnSuccess(onSuccessFn),
 		isolator.SessionOnError(onErrorRollbackFn),
-		// common.XormEngines.NewXORMSession(common.DBNameMember, false),
+
+		// Use xorm session
+		// common.XormEngines.NewXORMSession(common.DBNameUser, false),
 		// isolator.SessionOnSuccess(xorm.OnXORMSessionSuccess),
 		// isolator.SessionOnError(xorm.OnXORMSessionError),
 	); err != nil {

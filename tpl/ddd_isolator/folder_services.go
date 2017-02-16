@@ -17,13 +17,13 @@ type Service struct {
 }
 
 // NewProductHandler return default product handler
-func NewService(isolator *isolator.Isolator) *Service {
+func NewService(isor *isolator.Isolator) *Service {
 	if service == nil {
 		service = &Service{
-			Isolator: isolator,
-			Logics:   logic.NewLogics(),
+			Logics: logic.NewLogics(),
 		}
 	}
+	service.Isolator = isor
 	return service
 }
 `

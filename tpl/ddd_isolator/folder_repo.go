@@ -9,6 +9,8 @@ import (
 	"{{.PathDomain}}"
 )
 
+import _ "github.com/go-sql-driver/mysql"
+
 type UserRepository interface {
 	isolator.Object
 

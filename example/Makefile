@@ -15,6 +15,7 @@ ddd_sample: build
 
 
 ddd_isolator: build
+	gorut deps
 	gorut create -f -t=ddd_isolator
 	./run.sh
 	@echo "ddd_isolator done"
